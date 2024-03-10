@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models.base models import BaseModel
+from models.base_model import BaseModel
 from models import storage
 import cmd
 import shlex
@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """
-        Create a new instane of BaseModel and save it to the JSON file.
+        Create a new instance of BaseModel and save it to the JSON file.
         Usage: create <class_name>
         """
         commands = shlex.split(arg)
@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: destroy <class_name> <id>
         """
         
-        commands =shlex.split(arg)
+        commands = shlex.split(arg)
 
         if len(comands) == 0:
             print("** class name missing **")
@@ -146,18 +146,18 @@ class HBNBCommand(cmd.Cmd):
 
     def help_quit(self, arg):
         """
+        help the command to exit a program
 
         """
 
         print("Quit command to exit the program")
 
-    def do_EOF(self, arg):
+    def do_EOF(self, line):
         """
         Handle the End-of-File (ctrl+D) event to exit the program.
 
         """
 
-        print()
         return True
 
 
