@@ -9,6 +9,7 @@ class HBNBCommand(cmd.Cmd):
     valid_classes = ["BaseModel"]
 
 
+
     def emptyline(self):
         """
         Do nothing when an empty line is entered.
@@ -25,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-        """
+        """ 
         Create a new instance of BaseModel and save it to the JSON file.
         Usage: create <class_name>
         """
@@ -40,7 +41,6 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-    
     def do_show(self, arg):
         """
         show the string representation of an instance
@@ -68,7 +68,6 @@ class HBNBCommand(cmd.Cmd):
         Delete an instance based on the class name and id.
         Usage: destroy <class_name> <id>
         """
-        
         commands = shlex.split(arg)
 
         if len(comands) == 0:
@@ -79,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}".format(commands[0],commands[1])
+            key = "{}.{}".format(commands[0], commands[1])
             if key in objects:
                 del objects[key]
                 storage.save()
@@ -98,19 +97,18 @@ class HBNBCommand(cmd.Cmd):
         if len(comands) == 0:
             for key, value in objects.items():
                 print(str(value))
-            elif commands[0] not in self.valid_classes:
-                print("** class doesn't exist **")
-            else:
-                for key, value in objects.items():
-                    if key.split('.')[0] == commands[0]:
-                        print(str(value))
+        elif commands[0] not in self.valid_classes:
+            print("** class doesn't exist **")
+        else:
+            for key, value in objects.items():
+                if key.split('.')[0] == commands[0]:
+                    print(str(value))
 
     def do_update(self, arg):
         """
         update an instance by updating and adding an attribute.
         usage: update <class_name> <attribute_name> "<attribute_value
         """
-        
         commands = shlex.split(arg)
 
         if len(commands) == 0:
@@ -122,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             objects = storage.all()
 
-            key = "{}.{}".format(commands[0],commands[1])
+            key = "{}.{}".format(commands[0], commands[1])
             if key not in objects:
                 print("** no instance found **")
             elif len(commands) < 3:
@@ -142,7 +140,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, attr_name, attr_value)
 
                 obj.save()
-
 
     def help_quit(self, arg):
         """
